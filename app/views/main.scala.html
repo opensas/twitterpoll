@@ -1,0 +1,57 @@
+@(title: String)(page: String = "")(user: Option[models.User])(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>@title</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("bootstrap/css/bootstrap.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("bootstrap/css/docs.css")">
+    <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+    <script src="@routes.Assets.at("javascripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+</head>
+
+<body>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="@routes.JavaController.index()">Poll app</a>
+            <ul class="nav">
+                <li @if(page == "createPoll") { class="active" }><a href="@routes.Application.pollForm()">Create Poll</a></li>
+                <li @if(page == "myPolls") { class="active" }><a href="@routes.Application.myPolls()">My polls</a></li>
+                <li><a href="@routes.JavaController.jsonPolls()">Web service rest</a></li>
+                <li><a href="https://github.com/opensas/twitterpoll#readme">Sources</a></li>
+                <li><a href="@routes.Assets.at("slides/slides.html")">Slides</a></li>
+            </ul>
+            @user.map { u =>
+                <ul class="nav pull-right">
+                    <li><a href="#"><img src="@u.profileImageUrl" style="width:20px;height:20px"> Hello @u.screenName</a></li>
+                    <li><a href="@routes.TwitterAuthenticator.logout()">Logout</a></li>
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="container" style="padding-top:30px">
+    @content
+
+    <footer class="footer">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p> Sample application for <a href="http://www.redhat.com/summit/developerday/schedule.html">Red Hat's Developer Day</a>
+            demoing Play! framework and mongodb support on Openshift.
+        </p>
+        <p>
+        Developed by
+            <a href="https://twitter.com/#!/jaliss" target="_blank">@@jaliss</a> and
+            <a href="https://twitter.com/#!/develsas" target="_blank">@@develsas</a>.
+            Source code is available on <a href="https://github.com/opensas/twitterpoll#readme">github</a>
+        </p>
+
+    </footer>
+
+</div>
+
+</body>
+</html>
