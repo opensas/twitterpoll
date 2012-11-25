@@ -1,0 +1,14 @@
+logs
+project/project
+project/target
+#target #commented for deploying to openshift
+tmp
+.history
+dist
+
+#idea project
+.idea/
+*.iml
+
+#sublime project
+*.sublime*

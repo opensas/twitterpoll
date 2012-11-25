@@ -1,0 +1,16 @@
+question=Question
+createPoll=Create Poll
+deletePoll=Delete Poll
+answerPoll=Answer Poll
+tweetPoll=Share on Twitter
+
+answer1= First option
+answer2= Second option
+answer3= Third option
+
+answerSaved=Your answer has been saved!
+pollDeleted=Poll has been deleted
+pollCreated=Poll has been created
+
+cancel=Cancel
+send=Send

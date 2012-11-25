@@ -1,0 +1,32 @@
+@(poll: Poll)(implicit user: Option[models.User])
+
+@main("Answer Poll")("")(user) {
+
+<div class="page-header">
+    <h1>@poll.question</h1>
+</div>
+
+<div class="clearfix">
+    @helper.form(action = routes.Application.saveAnswer(poll.id), 'class -> "form-horizontal") {
+    <fieldset>
+        @inputAnswer(poll, 1)
+        @inputAnswer(poll, 2)
+        @inputAnswer(poll, 3)
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">@Messages("send")</button>
+            <a class="btn" href="@routes.Application.myPolls()">@Messages("cancel")</a>
+        </div>
+    </fieldset>
+    }
+</div>
+}
+
+@inputAnswer(poll: Poll, option: Int) = {
+    <div class="control-group">
+        <label class="control-label" for="answer@option">@poll.answers(option)</label>
+        <div class="controls">
+            <input type="radio" class="input-xlarge" name="answer" id="answer@option" value="@option">
+        </div>
+    </div>
+}

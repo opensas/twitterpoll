@@ -1,0 +1,35 @@
+@(form: Form[Poll])(user: Option[models.User])
+
+@main("Create Poll")("createPoll")(user) {
+<div class="page-header">
+    <h1>Create Poll</h1>
+</div>
+
+<div class="clearfix">
+    @helper.form(action = routes.Application.createPoll(), 'class -> "form-horizontal") {
+    <fieldset>
+        @input(form("question"))
+        @input(form("answer1"))
+        @input(form("answer2"))
+        @input(form("answer3"))
+
+       <div class="form-actions">
+            <button type="submit" class="btn btn-primary">@Messages("createPoll")</button>
+            <a class="btn" href="@routes.JavaController.index()">@Messages("cancel")</a>
+        </div>
+    </fieldset>
+    }
+</div>
+}
+
+@input(field: Field) = {
+    <div class="control-group @(if (field.hasErrors) "error" )">
+        <label class="control-label" for="@field.name">@Messages(field.name)</label>
+        <div class="controls">
+            <input type="text" class="input-xlarge" name="@field.name" id="@field.name" value="@field.value">
+            @if(field.error.isDefined) {
+            <span class="help-inline">@Messages(field.error.get.message)</span>
+            }
+        </div>
+    </div>
+}

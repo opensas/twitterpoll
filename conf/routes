@@ -1,0 +1,31 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+#
+# Twitter Authentication
+#
+GET     /auth                       controllers.TwitterAuthenticator.oauthFlow
+GET     /logout                     controllers.TwitterAuthenticator.logout
+
+GET     /                           controllers.JavaController.index
+
+# Dashboard
+GET     /mypolls                    controllers.Application.myPolls
+
+# Poll creation
+GET     /new                        controllers.Application.pollForm
+POST    /new                        controllers.Application.createPoll
+
+GET     /delete/:id                 controllers.Application.deletePoll(id: ObjectId)
+
+# Replies
+GET     /poll/:id                   controllers.Application.answerForm(id: ObjectId)
+POST    /poll/:id                   controllers.Application.saveAnswer(id: ObjectId)
+GET     /tweet/:id                  controllers.Application.tweetPoll(id: ObjectId)
+
+GET     /rest/polls                 controllers.JavaController.jsonPolls
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
