@@ -1,0 +1,39 @@
+@(poll: Poll, readOnly: Boolean = false)
+
+<h3>@poll.question
+    <a href="@routes.Application.tweetPoll(poll.id)" class="btn btn-mini btn-success btn-primary">@Messages("tweetPoll")</a>
+    @if(! readOnly) {
+    <a href="@routes.Application.deletePoll(poll.id)" class="btn btn-mini btn-danger">@Messages("deletePoll")</a>
+    }
+    <a href="@routes.Application.answerForm(poll.id)" class="btn btn-mini btn-success btn-primary">@Messages("answerPoll")</a>
+</h3>
+<table class="table table-striped table-bordered">
+    <tbody>
+
+    @progressBar(poll, 1, "info")
+    @progressBar(poll, 2, "success")
+    @progressBar(poll, 3, "warning")
+
+    <tr>
+        <th>Total answers</th>
+        <th>100 %</th>
+        <th>@poll.counter</th>
+    </tr>
+    </tbody>
+</table>
+
+@progressBar(poll: Poll, option: Int, style: String = "info") = {
+
+    @defining({
+        val counter = poll.counter
+        if (counter==0) 0 else poll.counterForOption(option) * 100 / counter
+    }) { percent =>
+    <tr>
+        <td>@poll.answers(option)</td>
+        <td class="progress progress-@style progress" style="margin-bottom: 9px;">
+            <div class="bar" style="width: @percent%"></div>
+        </td>
+        <td>@percent %</td>
+    </tr>
+    }
+}
