@@ -20,7 +20,7 @@ First we will create a Do-It-Yourself application on OpenShift.
 ```bash
 rhc app create -a poll -t diy-0.1 -l <your OpenShift login> -p <your OpenShift password>
 
-cd polls
+cd poll
 ```
 
 Now we will add TwitterPoll's github repository as a remote and fetch it's contents
@@ -64,7 +64,7 @@ rockmongo-1.1
 ```
 
 It's generally a good practice to define a custom account to access the database, instead of using the admin account
-provided by OpenShift, so we'll create the database and user to be used by the application, according to the
+provided by OpenShift, so we'll create the database and a user to be used by the application, according to the
 conf/openshift.conf file.
 
 Click on *databases*, *Create New Database*, and enter *polls* as database name.
