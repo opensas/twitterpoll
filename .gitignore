@@ -6,6 +6,8 @@ tmp
 .history
 dist
 
+conf/secrets.conf
+
 #idea project
 .idea/
 *.iml

@@ -34,34 +34,33 @@ git pull -s recursive -X theirs github master
 Next we will add mongodb support to our application running on OpenShift:
 
 ```bash
-rhc app cartridge add -c mongodb-2.0 -a poll -l <your OpenShift login> -p <your OpenShift password>
+rhc cartridge add mongodb-2.2 -a poll -l <your OpenShift login> -p <your OpenShift password>
 
-RESULT:
-
-MongoDB 2.0 database added.  Please make note of these credentials:
-
-       Root User: admin
-   Root Password: xxxxxx
-   Database Name: poll
-
-Connection URL: mongodb://xxx.xxx.xxx.xxx:27017/
-
-You can manage your new MongoDB by also embedding rockmongo-1.1
+Success
+mongodb-2.2
+===========
+  Properties
+  ==========
+    Connection URL = mongodb://xxx.xxx.xxx.xxx:27017/
+    Username       = admin
+    Password       = xxxxxx
+    Database Name  = poll
 ```
 
-We will follow the advice and install rockmongo
+You can manage your new MongoDB by also embedding rockmongo-1.1.
 
 ```bash
-rhc app cartridge add -c rockmongo-1.1 -a poll -l <your OpenShift login> -p <your OpenShift password>
+rhc cartridge add rockmongo-1.1 -a poll -l <your OpenShift login> -p <your OpenShift password>
 
-RESULT:
+Success
+rockmongo-1.1
+=============
+  Properties
+  ==========
+    Password       = xxxxxx
+    Connection URL = https://poll-playdemo.rhcloud.com/rockmongo/
+    Username       = admin
 
-rockmongo-1.1 added.  Please make note of these MongoDB credentials again:
-
-   RockMongo User    : admin
-   RockMongo Password: xxxxxx
-
-URL: https://poll-playdemo.rhcloud.com/rockmongo/
 ```
 
 It's generally a good practice to define a custom account to access the database, instead of using the admin account
