@@ -1,4 +1,4 @@
-# Poll app
+# TwitterPoll
 ---
 
 ## Killer Cocktail: Play! Framework, MongoDB & Red Hat OpenShift
@@ -10,12 +10,48 @@ share them on Twitter so your followers can answer them.
 The application features Play Framework 2 with Java and Scala, MongoDB support, and deployment on
 [OpenShift](https://openshift.redhat.com).
 
-The application will be up and running for a couple of days after the presentation at:
+The application will be up and running at:
 [https://poll-opensas.rhcloud.com/](https://poll-opensas.rhcloud.com/)
+
+Source is available at [https://github.com/opensas/twitterpoll](https://github.com/opensas/twitterpoll)
+
+Slides available at [https://poll-opensas.rhcloud.com/assets/slides/slides.html](https://poll-opensas.rhcloud.com/assets/slides/slides.html)
+
+## How does it work?
+
+[TwitterPoll](https://poll-opensas.rhcloud.com/) is a simple web application. It lets you create polls, save them to a MongoDB database, answer and then share them on twitter.
+
+To be able to vote and create polls, you first need to log in with twitter.
+
+Then you enter the question and three possible answers.
+
+You also have a rest web service to fetch all the current polls, developed in Java (have a look at [/api/polls](https://poll-opensas.rhcloud.com/api/polls)) just to showcase the interaction of Scala and Java code.
+
+The application has been kept simple enough to be shown in a live editing session and to serve as a building block for an application interacting with Twitter and MongoDB.
+
+## Future improvements
+
+Version 2.1 of Play! (current release candidate version) will be featuring a new non-blocking, asynchronous MongoDB driver, called [ReactiveMongo](http://reactivemongo.org/).
+
+Using this driver will allow us to avoid any kind of blocking request.
+
+## Dependencies
+
+Casbah: Officially supported Scala driver for MongoDB (https://github.com/mongodb/casbah)
+
+Salat: Salat is a simple serialization library for case classes (https://github.com/novus/salat)
+
+Play-Salat: MongoDB Salat plugin for Play Framework 2 (https://github.com/leon/play-salat)
 
 ## Quickguide to have it up and running on OpenShift
 
-First we will create a Do-It-Yourself application on OpenShift.
+First of al you'll need a valid play framework installation. Just follow this [instructions](http://www.playframework.org/documentation/latest/Installing) to download and install the latest stable version of Play Framework.
+
+To test it locally, you will also need a mongoDB server. Check the [instructions](http://www.mongodb.org/display/DOCS/Quickstart) corresponding to your operating system.
+
+Now, to deploy it on OpenShift, you'll first have to [register an account](https://openshift.redhat.com/app/account/new) and then follow [this instructions](https://openshift.redhat.com/community/get-started) to install the client tools and set up your development environment. You have more detailed instructions [here](https://openshift.redhat.com/community/developers/install-the-client-tools)
+
+Then we will create a Do-It-Yourself application on OpenShift.
 
 ```bash
 rhc app create -a poll -t diy-0.1 -l <your OpenShift login> -p <your OpenShift password>
@@ -58,7 +94,7 @@ rockmongo-1.1
   Properties
   ==========
     Password       = xxxxxx
-    Connection URL = https://poll-playdemo.rhcloud.com/rockmongo/
+    Connection URL = https://poll-<your namespace>.rhcloud.com/rockmongo/
     Username       = admin
 
 ```
@@ -106,3 +142,7 @@ file accordingly.
 To find out more about how to deploy a Play Framework application on OpenShift, have a look at
 [this screencast](http://playlatam.wordpress.com/2012/05/21/deploying-play-framework-2-apps-with-java-and-scala-to-openshift/)
 and check this [quickstart](https://github.com/opensas/play2-openshift-quickstart) on github.
+
+##Licence
+
+TwitterPoll is distributed under the Apache 2 licence.
