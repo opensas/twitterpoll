@@ -1,0 +1,47 @@
+@(user: Option[models.User], polls: Seq[Poll], flash: play.mvc.Http.Flash)
+
+@import helper._
+
+@main("Dashboard")("dashboard")(user) {
+
+<div class="container">
+    <header class="masthead">
+        <div class="inner">
+            <h1>Poll App</h1>
+            <p> Killer Cocktail: Play! Framework, MongoDB & Red Hat OpenShift.</p>
+            <p class="small">
+                This sample application developed for
+                <a href="http://www.redhat.com/summit/developerday/schedule.html">Red Hat's Developer Day</a>,
+                will let you create polls and share them on Twitter so your followers can answer them.
+            </p>
+            <p class="download-info">
+                <a href="@routes.Application.pollForm()" class="btn btn-primary btn-large">Create a poll</a>
+                <a href="@routes.Application.myPolls()" class="btn btn-large">Check my polls</a>
+                <a href="https://github.com/opensas/twitterpoll#readme" class="btn btn-large">View project on github</a>
+            </p>
+        </div>
+    </header>
+    <hr class="soften">
+</div>
+
+@if(flash.containsKey("success")) {
+    <div class="alert alert-success">
+        @flash.get("success")
+    </div>
+}
+
+<div class="clearfix">
+
+    @if(polls.size==0) {
+        <h3>No polls found. Click <a href="@routes.Application.pollForm()">here</a> to create your first poll</h3>
+    } else {
+        <h1>Active Polls</h1>
+        <hr>
+
+        @for(poll <- polls) {
+            @tags.displayPoll(poll, readOnly=true)
+        }
+    }
+</div>
+
+}

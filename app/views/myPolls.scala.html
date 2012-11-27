@@ -1,0 +1,21 @@
+@(polls: Seq[Poll])(user: Option[models.User])(implicit flash: play.api.mvc.Flash)
+
+@import helper._
+
+@main("Dashboard")("myPolls")(user) {
+    <div class="page-header">
+        <h1>My polls (@(if(polls.size==0) "no" else polls.size) active poll@(if(polls.size!=1)"s"))</h1>
+    </div>
+
+    @flash.get("success").map { message =>
+        <div class="alert alert-success">
+            @message
+        </div>
+    }
+
+    <div class="clearfix">
+        @for(poll <- polls) {
+            @tags.displayPoll(poll)
+        }
+    </div>
+}
